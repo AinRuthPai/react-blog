@@ -12,7 +12,7 @@ function App() {
   // state에 데이터 저장해놓는 이유 -> html이 자동으로 재렌더링이 됨
   // 자주 변경되는 것들은 state 사용하면 좋음
   let [postTitle, postTitleChange] = useState(["HTML", "CSS", "JavaScript"]);
-  let [like, likeChange] = useState(0);
+  let [like, likeChange] = useState([0, 0, 0]);
   let [modal, modalChange] = useState(false);
   let [id, idChange] = useState(0);
   let [inputTxt, inputTxtChange] = useState("");
@@ -23,6 +23,12 @@ function App() {
     const newArray = [...postTitle];
     newArray[0] = ["React"];
     postTitleChange(newArray);
+  }
+
+  function likeforeach(i) {
+    const newLike = [...like];
+    newLike[i] = newLike[i] + 1;
+    likeChange(newLike);
   }
 
   return (
@@ -39,15 +45,13 @@ function App() {
               onClick={() => {
                 modalChange(!modal);
                 idChange(i);
-              }}
-            >
+              }}>
               {post}
             </h3>
             <span
               onClick={() => {
                 likeChange(like + 1);
-              }}
-            >
+              }}>
               👍
             </span>
             {like}
@@ -68,8 +72,7 @@ function App() {
             const postTitleAry = [...postTitle];
             postTitleAry.unshift(inputTxt);
             postTitleChange(postTitleAry);
-          }}
-        >
+          }}>
           저장
         </button>
       </div>
@@ -78,8 +81,7 @@ function App() {
       <button
         onClick={() => {
           modalChange(!modal);
-        }}
-      >
+        }}>
         Modal
       </button>
 
